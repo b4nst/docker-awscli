@@ -27,7 +27,12 @@ action "publish" {
 action "github tag" {
   uses    = "docker://appropriate/curl:latest"
   needs   = "publish"
-  args    = "-X POST -H 'Accept: application/json' -H \"Authorization: Bearer $GITHUB_TOKEN\" -d @./post_tag.json https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs"
+
+  runs    = [
+    "sh",
+    "-c",
+    "curl -X POST -H 'Accept: application/json' -H \"Authorization: Bearer $GITHUB_TOKEN\" -d @./post_tag.json https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs"
+  ]
 
   secrets = [
     "GITHUB_TOKEN"
