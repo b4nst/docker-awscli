@@ -1,5 +1,6 @@
 workflow "Build and deploy" {
-  on = "push"
+  on       = "push"
+  resolves = "github tag"
 }
 
 action "build" {
@@ -8,9 +9,13 @@ action "build" {
 }
 
 action "login" {
-  uses = "actions/docker/login@master"
-  needs = "build"
-  secrets = ["DOCKER_USERNAME", "DOCKER_PASSWORD"]
+  uses    = "actions/docker/login@master"
+  needs   = "build"
+
+  secrets = [
+    "DOCKER_USERNAME",
+    "DOCKER_PASSWORD"
+  ]
 }
 
 action "publish" {
@@ -19,8 +24,11 @@ action "publish" {
 }
 
 action "github tag" {
-  uses = "docker://appropriate/curl:latest"
-  needs = "publish"
-  secrets = ["GITHUB_TOKEN"]
-  args = "-X POST -H 'Accept: application/json' -H \"Authorization: Bearer $GITHUB_TOKEN\" -d @./post_tag.json https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs"
+  uses    = "docker://appropriate/curl:latest"
+  needs   = "publish"
+  args    = "-X POST -H 'Accept: application/json' -H \"Authorization: Bearer $GITHUB_TOKEN\" -d @./post_tag.json https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs"
+
+  secrets = [
+    "GITHUB_TOKEN"
+  ]
 }
