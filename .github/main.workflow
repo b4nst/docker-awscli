@@ -1,5 +1,5 @@
 workflow "Build and deploy" {
-  on       = "push"
+  on       = "schedule(0 */6 * * *)"
   resolves = "github tag"
 }
 
