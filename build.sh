@@ -18,3 +18,5 @@ fi
 
 docker build --build-arg AWS_CLI_VERSION=$latest -t banst/awscli:$latest -t banst/awscli:latest .
 echo "{\"ref\": \"refs/tags/$latest\", \"sha\": \"$GITHUB_SHA\"}" > post_tag.json
+
+echo "✨"
