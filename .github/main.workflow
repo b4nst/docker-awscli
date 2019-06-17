@@ -19,8 +19,9 @@ action "login" {
 }
 
 action "publish" {
-  uses = "actions/docker/cli@master"
-  args = "push banst/awscli"
+  uses  = "actions/docker/cli@master"
+  needs = "login"
+  args  = "push banst/awscli"
 }
 
 action "github tag" {
