@@ -6,8 +6,8 @@ name: deploy
 on: push
 
 jobs:
-  runs-on: ubuntu-latest
   deploy:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v1
