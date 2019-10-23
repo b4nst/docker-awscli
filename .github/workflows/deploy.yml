@@ -6,6 +6,7 @@ name: deploy
 on: push
 
 jobs:
+  runs-on: ubuntu-latest
   deploy:
     steps:
       - name: Checkout
