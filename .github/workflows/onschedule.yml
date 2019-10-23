@@ -1,9 +1,8 @@
 name: tag
 
-# on:
-#   schedule:
-#     - cron: "0 */6 * * *"
-on: push
+on:
+  schedule:
+    - cron: "0 */1 * * *"
 
 jobs:
   deploy:
