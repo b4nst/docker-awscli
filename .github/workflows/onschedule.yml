@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: curl https://api.github.com/repos/b4nst/docker-awscli/tags | jq '.[].name' > tag-done
-       
+      - run: echo tag-done
