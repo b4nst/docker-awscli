@@ -9,5 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: curl https://api.github.com/repos/b4nst/docker-awscli/tags | jq '.[].name' > tag-done
-      - run: cat tag-done
+      - name: Extract releases done
+        run: curl https://api.github.com/repos/b4nst/docker-awscli/tags | jq '.[].name' > tag-done
+      - name: Extract releases exisiting
+        run: curl https://pypi.org/pypi/awscli/json | jq '.releases | keys[]'
+      - name: Diff
+        run: grep -Fxvf done exisiting
