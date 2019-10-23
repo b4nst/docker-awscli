@@ -8,8 +8,8 @@ ENV PYTHONIOENCODING=UTF-8
 
 RUN apk add --no-cache jq
 
-ARG AWS_CLI_VERSION
+ARG GITHUB_REF
 
-RUN pip install --user awscli==$AWS_CLI_VERSION
+RUN pip install --user awscli==$(echo $GITHUB_REF | sed -e "s/refs\/tags\///g")
 
 ENTRYPOINT [ "aws" ]

@@ -1,28 +1,19 @@
-# name: deploy
+name: deploy
 
-# # on:
-# #   schedule:
-# #     - cron: "0 */6 * * *"
-# on: push
+on: tag
 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v1
-#       - name: Setup docker
-#         uses: docker-practice/actions-setup-docker@0.0.1
-#       - name: Build
-#         run: ./build.sh
-#       - name: Login
-#         uses: azure/container-actions/docker-login@master
-#         with:
-#           username: ${{ secrets.DOCKER_USERNAME }}
-#           password: ${{ secrets.DOCKER_PASSWORD }}
-#       - name: Publish
-#         run: docker push banst/awscli
-#       - name: Tag
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         run: "curl -X POST -H 'Accept: application/json' -H \"Authorization: Bearer $GITHUB_TOKEN\" -d @./post_tag.json https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Publish to Dockerhub
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: banst/awscli
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          dockerfile: Dockerfile
+          tag_names: true
+          buildargs: GITHUB_REF
