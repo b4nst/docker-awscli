@@ -12,6 +12,6 @@ jobs:
       - name: Extract releases done
         run: curl https://api.github.com/repos/b4nst/docker-awscli/tags | jq '.[].name' > tag-done
       - name: Extract releases exisiting
-        run: curl https://pypi.org/pypi/awscli/json | jq '.releases | keys[]' aws-tags
+        run: curl https://pypi.org/pypi/awscli/json | jq '.releases | keys[]' > aws-tags
       - name: Diff
         run: grep -Fxvf tag-done aws-tags
