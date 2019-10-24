@@ -1,1 +1,2 @@
+#!/bin/bash
 docker build --build-arg AWS_CLI_VERSION=$DOCKER_TAG -f $DOCKERFILE_PATH -t $IMAGE_NAME .
