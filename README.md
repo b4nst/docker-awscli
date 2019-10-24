@@ -10,7 +10,7 @@ awscli in a container
 docker run --rm -it banst/awscli --version
 ```
 
-This image is [automatically builded](https://github.com/BastienAr/docker-awscli/actions) every 6 hours if there is a new release available from aws official repository.
+This image is [automatically builded](https://github.com/BastienAr/docker-awscli/actions) to catch up with all official releases available for the aws-cli.
 
 As this image is mainly useful in a CI context, [jq](https://stedolan.github.io/jq/) is also provided in it, to parse some awscli response.
 
