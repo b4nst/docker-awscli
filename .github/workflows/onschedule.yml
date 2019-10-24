@@ -1,25 +1,25 @@
-name: tag
+# name: tag
 
-on:
-  schedule:
-    - cron: "*/5 * * * *"
+# on:
+#   schedule:
+#     - cron: "*/30 * * * *"
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Extract tags done
-        run: git tag > tag-done
-      - name: Extract releases exisiting
-        run: curl https://pypi.org/pypi/awscli/json | jq -r '.releases | keys[]' > aws-tags
-      - name: Get first unreleased tag
-        run: grep -m 1 -Fxvf tag-done aws-tags > next-tag
-      - name: Tag
-        uses: jaliborc/action-general-autotag@1.0.0
-        with:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-          source_file: next-tag
-          extraction_regex: "(\\d+\\.\\d+\\.\\d+)"
-          tag_message: "Automatic tag following AWS available release"
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v1
+#       - name: Extract tags done
+#         run: git tag > tag-done
+#       - name: Extract releases exisiting
+#         run: curl https://pypi.org/pypi/awscli/json | jq -r '.releases | keys[]' > aws-tags
+#       - name: Get first unreleased tag
+#         run: grep -m 1 -Fxvf tag-done aws-tags > next-tag
+#       - name: Tag
+#         uses: jaliborc/action-general-autotag@1.0.0
+#         with:
+#           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+#           source_file: next-tag
+#           extraction_regex: "(\\d+\\.\\d+\\.\\d+)"
+#           tag_message: "Automatic tag following AWS available release"
