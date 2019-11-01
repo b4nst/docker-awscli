@@ -2,7 +2,7 @@ name: tag-unreleased
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: '*/10 * * * *'
 
 jobs:
   deploy:
@@ -16,10 +16,12 @@ jobs:
         run: curl https://pypi.org/pypi/awscli/json | jq -r '.releases | keys[]' > aws-tags
       - name: Get first unreleased tag
         run: grep -m 1 -Fxvf tag-done aws-tags > next-tag
+        continue-on-error: true
       - name: Tag
+        if: success()
         uses: jaliborc/action-general-autotag@1.0.0
         with:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           source_file: next-tag
           extraction_regex: "(\\d+\\.\\d+\\.\\d+)"
-          tag_message: "Automatic tag following AWS available release"
+          tag_message: 'Automatic tag following AWS available release'
