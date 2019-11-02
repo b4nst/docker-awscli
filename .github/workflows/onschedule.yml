@@ -2,7 +2,7 @@ name: tag-unreleased
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '0 */3 * * *'
 
 jobs:
   deploy:
