@@ -1,6 +1,6 @@
 # docker-awscli
 
-[![Github Action](https://github.com/b4nst/docker-awscli/workflows/tag-unreleased/badge.svg)](https://github.com/b4nst/docker-awscli/actions?workflow=deploy)
+[![Docker build](https://img.shields.io/docker/cloud/build/banst/awscli?label=build&logo=docker)](https://hub.docker.com/r/banst/awscli/builds)
 ![Docker Pulls](https://img.shields.io/docker/pulls/banst/awscli.svg?label=pulls&logo=docker)
 ![MicroBadger Size](https://img.shields.io/microbadger/image-size/banst/awscli.svg)
 
