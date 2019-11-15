@@ -15,13 +15,21 @@ jobs:
       - name: Extract releases exisiting
         run: curl https://pypi.org/pypi/awscli/json | jq -r '.releases | keys[]' > aws-tags
       - name: Get first unreleased tag
-        run: grep -m 1 -Fxvf tag-done aws-tags > next-tag
-        continue-on-error: true
+        run: grep -m 1 -Fxvf tag-done aws-tags | tr -d '\n' > latest
+      - name: Commit latest
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add latest
+          git commit -m "update latest tag"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Tag
-        if: success()
         uses: jaliborc/action-general-autotag@1.0.0
         with:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-          source_file: next-tag
+          source_file: latest
           extraction_regex: "(\\d+\\.\\d+\\.\\d+)"
           tag_message: 'Automatic tag following AWS available release'
