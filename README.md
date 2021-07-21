@@ -1,5 +1,8 @@
 # docker-awscli
 
+> Deprecated. AWS has now [an official docker image](https://hub.docker.com/r/amazon/aws-cli) for its CLI.
+> Please use the official image instead of this repository.
+
 [![Docker build](https://img.shields.io/docker/cloud/build/banst/awscli?label=build&logo=docker)](https://hub.docker.com/r/banst/awscli/builds)
 ![Docker Pulls](https://img.shields.io/docker/pulls/banst/awscli.svg?label=pulls&logo=docker)
 ![MicroBadger Size](https://img.shields.io/microbadger/image-size/banst/awscli.svg)
