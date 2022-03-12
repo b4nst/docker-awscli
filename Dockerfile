@@ -6,7 +6,7 @@ LABEL maintainer="Bastien Arata <bastyen.a@gmail.com>" \
 ENV PATH="/root/.local/bin:$PATH"
 ENV PYTHONIOENCODING=UTF-8
 
-RUN apk add --no-cache jq
+RUN apk add --no-cache jq groff
 
 ARG AWS_CLI_VERSION
 
